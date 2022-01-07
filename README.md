@@ -63,7 +63,7 @@ are also excluded as this increases the chances of early letter matches.
 
 The result is then two sets of words:
 
-* One with all the words that could occur with the given just the known letters
+* One with all the words that could occur with just the known letters
 * One with all the words that could occur given all the other constraints taken into account
 
 ### Part 2
