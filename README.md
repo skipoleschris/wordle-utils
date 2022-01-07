@@ -21,7 +21,7 @@ Examples:
 
     -----   : No guesses
     S----   : Letter 's' present in the word at the correct position
-    --e--   : Letter 'e' present in the work but not at this position
+    --e--   : Letter 'e' present in the word but not at this position
 
 The exclusions are a list of letters that have been tried and found to
 not be present in the word. Example:
@@ -54,15 +54,11 @@ First it filters the dictionary down to only words that:
 * have the correct number of letters
 * have the letters at known positions present
 
-From this list of words it then works out the probabilities of each letter appearing
-at each position in the subset of dictionary words.
-
-It then further filters the set of word to only those that:
+It then further filters the first set of word into a second set that only contains those words  that:
 
 * do not contain any of the excluded letters
 * contain all the mis-located letters in any of the other locations
-
-Additionally, on early passes (< 6 excluded letters) words with repeated letters
+* on early passes (< 6 excluded letters) words with repeated letters
 are also excluded as this increases the chances of early letter matches.
 
 The result is then two sets of words:
@@ -80,5 +76,7 @@ them to only words present in this set of words. These are the guess candidates.
 
 Finally, the solution sorts these words based on the probabilities of each letter
 occurring at that position in the wider first set of words.
+
+The words are then listed in descending order of probability.
 
 
