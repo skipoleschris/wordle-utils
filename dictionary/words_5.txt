@@ -9157,7 +9157,7 @@ mochy
 mocks
 mocoa
 modal
-model
+wordle.model
 modem
 moder
 modes

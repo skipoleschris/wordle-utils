@@ -47,9 +47,9 @@ Algorithm
 ---------
 
 ### Part 1
-The dictionary filter uses the following algorithm:
+The wordle.service filter uses the following algorithm:
 
-First it filters the dictionary down to only words that:
+First it filters the wordle.service down to only words that:
 
 * have the correct number of letters
 * have the letters at known positions present
