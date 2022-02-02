@@ -4,10 +4,10 @@ data class SolutionWord(
     val word: String,
     val letterProbabilities: List<Double>
 ) {
-    fun averageProbability() = letterProbabilities.average()
+    val averageProbability = letterProbabilities.average()
 
     override fun toString(): String =
-        "$word: ${averageProbability()} (${letterProbabilities.joinToString()})"
+        "$word: $averageProbability (${letterProbabilities.joinToString()})"
 
     companion object {
 

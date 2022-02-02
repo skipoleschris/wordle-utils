@@ -10,7 +10,7 @@ class SolutionWordTest {
     @Test
     fun `should calculate average probability for the word`() {
         val word = SolutionWord("test", listOf(0.5, 0.6, 0.4, 0.5))
-        assertEquals(0.5, word.averageProbability())
+        assertEquals(0.5, word.averageProbability)
     }
 
     @Test

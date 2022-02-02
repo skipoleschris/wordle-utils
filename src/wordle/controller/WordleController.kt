@@ -55,6 +55,6 @@ open class WordleController(
         candidates: Set<String>
     ): List<SolutionWord> {
         val builder = SolutionWord.createBuilder(pattern, analysis)
-        return candidates.map(builder).sortedBy { it.averageProbability() }.reversed()
+        return candidates.map(builder).sortedBy { it.averageProbability }.reversed()
     }
 }
