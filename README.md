@@ -4,14 +4,27 @@ Wordle Utilities
 This code provides a utility to help solving of Wordle problems.
 The daily Wordle challenge can be found here: https://www.powerlanguage.co.uk/wordle/
 
+This Branch
+-----------
+
+The 'main' branch implements the wordle utils as a command line application.
+This branch refactors the code and utilises Spring Boot to provide an http
+API for generating wordle guesses.
+
 Usage
 -----
+To start the spring boot application:
 
-The usage of the utility is as follows:
+    java -jar wordle-solver.jar
 
-    java -jar wordle-solver.jar <pattern> [exclusions]
+This starts the server on the default port 8080. Normal spring boot configuration
+options can be used to override all the main settings.
 
-The pattern uses the following elements:
+The api can be called using the following URI:
+
+   http://localhost:8080/solve?pattern=<pattern>&exclusions=<exclusions>
+
+The pattern query parameter is mandatory and uses the following elements:
 
 * '-' for an unknown letter
 * uppercase for a correct letter in the right place
@@ -19,29 +32,39 @@ The pattern uses the following elements:
 
 Examples:
 
-    -----   : No guesses
-    S----   : Letter 's' present in the word at the correct position
-    --e--   : Letter 'e' present in the word but not at this position
+    pattern=-----   : No guesses
+    pattern=S----   : Letter 's' present in the word at the correct position
+    pattern=--e--   : Letter 'e' present in the word but not at this position
 
-The exclusions are a list of letters that have been tried and found to
+The exclusions query parameter is optional and if supplied is a list of letters that have been tried and found to
 not be present in the word. Example:
 
-    arf
+    excludions=arf
 
 Therefore, a complete example is:
 
-    java -jar wordle-solver.jar S-e-- arf
+    curl http://localhost:8080/solve?pattern=S-e--&exclusions=arf
 
-The output of the commands is a list of possible words ordered by probability:
+The output of the API call is a json document containing a list of possible words ordered by probability:
 
-    stile: 0.2883618312189741 (1.0, 0.11858797573083288, 0.12465526751241036, 0.07225592939878654, 0.12630998345284059)
-    stole: 0.288030888030888 (1.0, 0.11858797573083288, 0.12300055157198014, 0.07225592939878654, 0.12630998345284059)
-    stine: 0.2867071152785438 (1.0, 0.11858797573083288, 0.12465526751241036, 0.06398234969663541, 0.12630998345284059)
-    stone: 0.28637617209045774 (1.0, 0.11858797573083288, 0.12300055157198014, 0.06398234969663541, 0.12630998345284059)
+    [
+      {
+        "word": "stile",
+        "probability": 0.2883618312189741 
+        "letterProbabilities": [
+          1.0, 
+          0.11858797573083288, 
+          0.12465526751241036, 
+          0.07225592939878654, 
+          0.12630998345284059
+        ]
+      },
+      ...
+    }
 
-The first figure after the word is the average probability of each letter being correct.
+The first probability is the average probability of each letter being correct.
 
-This list of additional figures is the propbability of each individual character in the word being correct.
+This list of additional figures is the probabilities of each individual character in the word being correct.
 
 Algorithm
 ---------
